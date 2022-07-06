@@ -18,29 +18,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        FetchWeatherDataFromServer()
+        checkLocationManager()
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
-        if (error) != nil {
-            print(error)
-        }
+        print(error)
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        let locationArray:Array<CLLocation> = locations as! Array<CLLocation>
-        let locationObj = locationArray.last
-        var coord = locationObj?.coordinate
-        
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locationObj = locations.last
+        if let coord = locationObj?.coordinate{
+            AppData.getInstance().setCurrentDeviceLovation(
+                location: CLLocation.init(
+                    latitude: coord.latitude,
+                    longitude: coord.longitude
+                )
+            )
+            locationManager.stopUpdatingLocation()
+            FetchWeatherDataFromServer()
+        }
     }
     
     func checkLocationManager(){
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingLocation()
+            locationManager.requestLocation()
         } else {
             print("Location services are not enabled");
         }
@@ -57,6 +63,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             if(success){
                 print("Loaded initial weather for selected city")
                 print("Current Temp in \(AppData.getInstance()._selectedWeatherData.getTownName()) is \(AppData.getInstance()._selectedWeatherData.getCurrentTemp())")
+                
             }else{
                 print("Error loading data for selected city")
             }

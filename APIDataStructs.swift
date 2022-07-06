@@ -19,8 +19,8 @@ struct APIWeatherCore: Codable{
     let dt:Int
     let wind:Dictionary<String, Double>?
     //let sys:String
-    let rain:String?
-    let snow:String?
+    let rain:Dictionary<String, Double>?
+    let snow:Dictionary<String, Double>?
     let clouds:Dictionary<String, Int>
     let weather:Array<APIWeatherDataWeather>
 }
@@ -33,7 +33,7 @@ struct APIWeatherData: Codable{
     let dt:Int
     let wind:Dictionary<String, Int>
     let sys:String
-    let rain:String
+    let rain:Dictionary<String,Int>
     let snow:String
     let clouds:Dictionary<String, Int>
     let weather:Array<APIWeatherDataWeather>
