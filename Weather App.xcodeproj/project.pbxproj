@@ -89,8 +89,6 @@
 		649F81EB2874B60500D8B730 = {
 			isa = PBXGroup;
 			children = (
-				649F82312876AC6200D8B730 /* WeatherCell.swift */,
-				649F822F28754F1A00D8B730 /* APIDataStructs.swift */,
 				649F81F62874B60500D8B730 /* Weather App */,
 				649F820D2874B60800D8B730 /* Weather AppTests */,
 				649F82172874B60800D8B730 /* Weather AppUITests */,
@@ -111,6 +109,8 @@
 		649F81F62874B60500D8B730 /* Weather App */ = {
 			isa = PBXGroup;
 			children = (
+				649F822F28754F1A00D8B730 /* APIDataStructs.swift */,
+				649F82312876AC6200D8B730 /* WeatherCell.swift */,
 				649F81F72874B60500D8B730 /* AppDelegate.swift */,
 				649F81F92874B60500D8B730 /* SceneDelegate.swift */,
 				649F81FB2874B60500D8B730 /* ViewController.swift */,

@@ -29,6 +29,10 @@ class AppData {
     var _cities:Array<Dictionary<String, String>> = [
         ["name": "Stockholm", "lat":"59.3293", "lon":"18.0686"],
         ["name": "Gothenburg", "lat":"57.7089", "lon":"11.9746"],
+        ["name": "Mountain View", "lat":"37.3861", "lon":"122.0839"],
+        ["name": "London", "lat":"51.5072", "lon":"0.1276"],
+        ["name": "New York", "lat":"40.7128", "lon":"74.0060"],
+        ["name": "Berlin", "lat":"52.5200", "lon":"13.4050"],
     ]
     
     init() {

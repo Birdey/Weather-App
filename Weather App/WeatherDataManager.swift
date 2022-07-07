@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 class WeatherDataManager {
     
@@ -81,6 +82,11 @@ class WeatherDataManager {
                             max: weatherCoreData.main.temp_max,
                             min: weatherCoreData.main.temp_min
                         )
+                        if let weather = weatherCoreData.weather.first{
+                            weatherData.setWeatherID(id: weather.id)
+                        }
+                        weatherData.setHumidity(humidity: Int(weatherCoreData.main.humidity!))
+                        weatherData.dataIsLoaded()
                         completion(true)
                     } catch {
                         print("Error decoding JSON in getting Product")
@@ -91,5 +97,46 @@ class WeatherDataManager {
             }.resume()
         }
         
+    }
+    
+    func getIconBasedOnWeatherID(weatherID:Int) -> UIImage{
+        var imageName:String
+        
+        switch(weatherID){
+        case 200...299:
+            imageName = "01d" //Thunderstorm
+            break
+        case 300...399, 520...599:
+            imageName = "09d" // Heavy Rain
+            break
+        case  500...504:
+            imageName = "10d" // Light Rain
+            break
+        case 511, 600...699:
+            imageName = "13d" //Snow
+            break
+        case 700...799:
+            imageName = "50d" //Fog
+            break
+        case 800:
+            imageName = "01d" //Clear
+            break
+        case 801:
+            imageName = "02d" // Few Couds
+            break
+        case 802:
+            imageName = "03d" //Clouds
+            break
+        case 803, 804:
+            imageName = "04d" //Lots of clouds
+            break
+        default:
+            imageName = "03d" //Defaulting to clouds
+            break
+        }
+        
+        //print("Weather id \(weatherID) gives the image \(imageName)")
+        
+        return UIImage.init(named: imageName)!
     }
 }

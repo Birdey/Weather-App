@@ -18,6 +18,10 @@ class WeatherData{
     private var _minTemp:Double?
     private var _currentTemp:Double?
     
+    private var _humidity:Int?
+    
+    private var _weatherID:Int?
+    
     
     init(_ townName:String, _ location:CLLocation) {
         _townName = townName
@@ -95,6 +99,22 @@ class WeatherData{
             return convertTemp(temprature: t, tempScale: AppData.getInstance().getPreferedTempScale())
         }
         return 0.0
+    }
+    
+    func setHumidity(humidity:Int){
+        _humidity = humidity
+    }
+    
+    func getHumidity() -> Int{
+        return _humidity ?? 0
+    }
+    
+    func setWeatherID(id:Int){
+        _weatherID = id
+    }
+    
+    func getWeatherID() -> Int{
+        return _weatherID ?? 0
     }
     
 }
