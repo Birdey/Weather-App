@@ -75,7 +75,7 @@ class WeatherDataManager {
                     let decoder = JSONDecoder()
                     do{
                         let weatherCoreData = try decoder.decode(APIWeatherCore.self, from: data)
-                        print(weatherCoreData)
+                        //print(weatherCoreData)
                         weatherData.setTempratures(
                             current: weatherCoreData.main.temp,
                             max: weatherCoreData.main.temp_max,

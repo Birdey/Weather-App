@@ -10,41 +10,26 @@ import Foundation
 struct APIWeatherCore: Codable{
     let message:String?
     let cod:Int
-    //let count:Int
-    //let list:Array<APIWeatherData>
     let id:Int
     let name:String
+    let visibility:Int
     let coords:Dictionary<String, Double>?
     let main:APIWeatherDataMain
     let dt:Int
     let wind:Dictionary<String, Double>?
-    //let sys:String
     let rain:Dictionary<String, Double>?
     let snow:Dictionary<String, Double>?
     let clouds:Dictionary<String, Int>
     let weather:Array<APIWeatherDataWeather>
 }
 
-struct APIWeatherData: Codable{
-    let id:Int
-    let name:String
-    let coords:Dictionary<String, Double>
-    let main:APIWeatherDataMain
-    let dt:Int
-    let wind:Dictionary<String, Int>
-    let sys:String
-    let rain:Dictionary<String,Int>
-    let snow:String
-    let clouds:Dictionary<String, Int>
-    let weather:Array<APIWeatherDataWeather>
-}
-
 struct APIWeatherDataMain: Codable{
     let temp:Double
-    let preassure:Int?
-    let humidity:Int
+    let feels_like:Double
     let temp_min:Double
     let temp_max:Double
+    let preassure:Int?
+    let humidity:Int?
 }
 
 struct APIWeatherDataWeather: Codable{

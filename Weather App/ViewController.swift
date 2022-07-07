@@ -15,8 +15,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let _weatherManger: WeatherDataManager = WeatherDataManager()
 
+    @IBOutlet weak var _weatherListView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        _weatherListView.delegate = self
+        _weatherListView.dataSource = self
         // Do any additional setup after loading the view.
         checkLocationManager()
     }
@@ -64,6 +69,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 print("Loaded initial weather for selected city")
                 print("Current Temp in \(AppData.getInstance()._selectedWeatherData.getTownName()) is \(AppData.getInstance()._selectedWeatherData.getCurrentTemp())")
                 
+                DispatchQueue.main.async {
+                    //self._weatherListView.reloadData()
+                }
             }else{
                 print("Error loading data for selected city")
             }
@@ -72,3 +80,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 }
 
+extension ViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let weatherData:WeatherData = _weatherManger._weatherDatas[indexPath.row]
+        print("You tapped on \(weatherData.getTownName())!")
+    }
+    
+}
+
+extension ViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("TableView haz \(_weatherManger._weatherDatas.count) rows")
+        return _weatherManger._weatherDatas.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:WeatherCell = _weatherListView.dequeueReusableCell(withIdentifier: "weatherListCell", for: indexPath) as! WeatherCell
+        
+        print("Updating cell att index \(indexPath)")
+        
+        cell.townNameLabel.text = _weatherManger._weatherDatas[indexPath.row].getTownName()
+        cell.tempratureLabel.text = "..."
+        
+        //tableView.reloadRows(at: [indexPath], with: .automatic)
+        
+        return cell
+    }
+    
+}
