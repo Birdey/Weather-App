@@ -135,8 +135,6 @@ class WeatherDataManager {
             break
         }
         
-        //print("Weather id \(weatherID) gives the image \(imageName)")
-        
         return UIImage.init(named: imageName)!
     }
 }

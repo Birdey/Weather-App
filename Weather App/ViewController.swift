@@ -67,7 +67,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestWhenInUseAuthorization()
-            //locationManager.startUpdatingLocation()
             locationManager.requestLocation()
         } else {
             print("Location services are not enabled");
@@ -150,9 +149,6 @@ extension ViewController: UITableViewDataSource{
                 }
             }
         }
-        
-        
-        //tableView.reloadRows(at: [indexPath], with: .automatic)
         
         return cell
     }
